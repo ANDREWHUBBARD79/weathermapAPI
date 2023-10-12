@@ -21,16 +21,7 @@ class Program
 
          IDbConnection conn = new MySqlConnection(connString);
 
-        var repo = new DapperDepartmentRepository(conn);
-
-        var departments = repo.GetAllDepartments();
-
-        foreach (var department in departments)
-        {
-            Console.WriteLine($"{dept.DepartmentID} {dept.Name}");
-        }
-
-        repo.GetAllDepartments();
+        var repo = new DapperProductRepository();
 
     }
 }

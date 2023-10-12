@@ -1,28 +1,33 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Data.Common;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Dapper;
+using ORMAndDapper2;
 
-namespace ORMAndDapper2
+namespace BestBuyCRUD
 {
-    public class DapperDepartmentRepository : IDepartmentRepository
+    public class DepartmentRepository : DepartmentRepositoryBase, IDepartmentRepository
     {
-        private readonly IDbConnection _connection;
+        private readonly IDbConnection _conn;
 
-        public DapperDepartmentRepository(IDbConnection connection)
+        public DepartmentRepository(IDbConnection conn)
         {
-            _connection = connection;
+            _conn = conn;
         }
 
-            public IEnumerable<Department> GetAllDepartments()
+        public void CreateDepartment(string name)
         {
-            return _connection.Query<Department>("SELECT * FROM Departments;");
+            _conn.Execute("INSERT INTO departments Name Values(@name);", new { name = name });
         }
 
+        public void UpdateDepartment(int id, string newName)
+        {
+            _conn.Execute("UPDATE departments SET Name = @newName WHERE DepartmentID = @id;", new { newName = newName, id = id });
+        }
 
+        IEnumerable<Department> IDepartmentRepository.GetAllDepartments()
+        {
+            throw new NotImplementedException();
+        }
     }
 }
