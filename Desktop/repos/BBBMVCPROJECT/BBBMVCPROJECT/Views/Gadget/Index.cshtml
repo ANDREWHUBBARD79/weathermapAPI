@@ -1,0 +1,32 @@
+﻿@model IEnumerable<Gadget>
+
+<h2>Gadgets</h2>
+
+<div style="display: block">
+    <a href="/Gadget/InsertGadget/">Create a New Gadget</a>
+</div>
+
+
+<table class="table">
+    <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Price</th>
+        <th>Category ID</th>
+        <th>On Sale</th>
+        <th>Stock Level</th>
+    </tr>
+
+    @foreach (var gadget in @Model)
+    {
+        <tr>
+            <td><a href=/Gadget/ViewGadget/@gadget.GadgetID>@gadget.GadgetID</a></td>
+            <td>@gadget.Name</td>
+            <td>@gadget.Price</td>
+            <td>@gadget.CategoryID</td>
+            <td>@gadget.OnSale</td>
+            <td>@gadget.StockLevel</td>
+        </tr>
+    }
+
+</table>
